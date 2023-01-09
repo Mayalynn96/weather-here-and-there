@@ -101,7 +101,7 @@ aside {
 #weatherHeader {
     display: flex;
     background-color: #5D576B;
-    height: 7vh;
+    height: 10vh;
     align-items: center;
     color: #E6EBE0;
     opacity: 80%;
@@ -141,4 +141,9 @@ aside {
     margin-bottom: 10px;
     color: #5D576B;
     background-color: #E6EBE0;
+}
+
+.smallWidget {
+    height: 10vh;
+    width: 10vh;
 }
