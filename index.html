@@ -4,10 +4,80 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital@1&family=Karla:wght@200&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="assets/style.css">
     <title>Document</title>
 </head>
 <body>
+    <header>
+        <h1>Weather Here and There</h1>
+        <p id="yourLocation">Your Location is: </p>
+    </header>
+    <main>
+        <aside>
+            <div id="searchpart">
+                <h2>Search for a City</h2>
+                <input type="text" placeholder="City" id="cityInput">
+                <br>
+                <button id="search">Search</button>
+            </div>
+            <div id="searchHistory">
+                <button class="pastCity">Mexico</button>
+            </div>
+        </aside>
+        <section id="allWeatherContainer">
+            <div id="today">
+                <div id="weatherHeader">
+                    <h2 id="day0">The Weather today in City ⛅</h2>
+                </div>
+                <p class="temp">Temp:</p>
+                <p class="wind">Wind:</p>
+                <p class="humidity">Humidity:</p>
+            </div>
+            <h3 id="title5Days">5-Day Forecast</h3>
+            <div id="forcast5Days">
+                <div id="day1" class="day">
+                    <h3 class="date">1/9/2023</h3>
+                    <p id="smallWidget">⛅</p>
+                    <p class="temp">Temp:</p>
+                    <p class="wind">Wind:</p>
+                    <p class="humidity">Humidity:</p>
+                </div>
+                <div id="day2" class="day">
+                    <h3 class="date">1/9/2023</h3>
+                    <p id="smallWidget">⛅</p>
+                    <p class="temp">Temp:</p>
+                    <p class="wind">Wind:</p>
+                    <p class="humidity">Humidity:</p>
+                </div>
+                <div id="day3" class="day">
+                    <h3 class="date">1/9/2023</h3>
+                    <p id="smallWidget">⛅</p>
+                    <p class="temp">Temp:</p>
+                    <p class="wind">Wind:</p>
+                    <p class="humidity">Humidity:</p>
+                </div>
+                <div id="day4" class="day">
+                    <h3 class="date">1/9/2023</h3>
+                    <p id="smallWidget">⛅</p>
+                    <p class="temp">Temp:</p>
+                    <p class="wind">Wind:</p>
+                    <p class="humidity">Humidity:</p>
+                </div>
+                <div id="day5" class="day">
+                    <h3 class="date">1/9/2023</h3>
+                    <p id="smallWidget">⛅</p>
+                    <p class="temp">Temp:</p>
+                    <p class="wind">Wind:</p>
+                    <p class="humidity">Humidity:</p>
+                </div>
+            </div>
+        </section>
+    </main>
     <script src="assets/script.js"></script>
 </body>
 </html>

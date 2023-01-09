@@ -1,5 +1,140 @@
 *{
     margin: 0;
     padding: 0;
-    background-color: pink;
+    box-sizing: border-box;
+    font-family: 'Karla', sans-serif;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 2%;
+    background-color: #5D576B;
+    color: #E6EBE0;
+}
+
+main {
+    display: flex;
+    margin: 2%;
+    width: 96%;
+}
+
+aside {
+    font-size: 20px;
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+}
+
+#searchpart {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    border-bottom: #5D576B solid 2px;
+    color: #5D576B;
+    padding-bottom: 30px;
+}
+
+#cityInput {
+    font-size: 25px;
+    margin-top: 5px;
+    padding: 1%;
+    width: 100%;
+    border-radius: 5px;
+}
+
+#search {
+    font-size: 25px;
+    width: 100%;
+    padding: 1%;
+    background-color: #5D576B;
+    color: #E6EBE0;
+    border-color: #5D576B;
+    border-radius: 5px;
+}
+
+#searchHistory {
+    color: #5D576B;
+    width: 90%;
+}
+
+.pastCity {
+    border-color: #5D576B;
+    border-radius: 5px;
+    margin: 2% 0;
+    font-size: 25px;
+    width: 100%;
+    padding: 1%;
+    background-color: #E6EBE0;
+}
+
+#allWeatherContainer {
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    height: 80vh;
+    justify-content: space-between;
+}
+
+#today {
+    height: 35vh;
+    border: solid 5px #5D576B;
+    border-radius: 5px;
+    background-image: url(images/clouds.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    
+}
+
+#today p {
+    font-size: 30px;
+    padding: 5px;
+    margin: 20px;
+    background-color: #E6EBE0;
+    opacity: 70%;
+    width: 30%;
+}
+
+#weatherHeader {
+    display: flex;
+    background-color: #5D576B;
+    height: 7vh;
+    align-items: center;
+    color: #E6EBE0;
+    opacity: 70%;
+}
+
+#day0 {
+    margin: 10px;
+}
+
+#title5Days {
+    font-size: 150%;
+}
+
+#forcast5Days {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    height: 35vh;
+}
+
+.day{
+    background-color: #5D576B;
+    width: 17%;
+    height: 100%;
+    padding-left: 1%;
+    color: #E6EBE0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    font-size: 120%;
+    border-radius: 5px;
+}
+
+.date{
+    margin-bottom: 10px;
 }
