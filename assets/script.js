@@ -2,6 +2,13 @@
 var lon;
 var lat;
 
+var cityHistoryString = localStorage.getItem("cityHistory")
+var cityHistory =  JSON.parse(cityHistoryString) || [];
+var defaultCity = "Los Angeles";
+var savedUserCity = localStorage.getItem("savedUserCity")
+var cityName = localStorage.getItem(savedUserCity) || defaultCity;
+
+
 var locationEl = document.getElementById("yourLocation");
 
 // getting coordinates
@@ -19,7 +26,12 @@ function showPosition(position) {
   getLocation();
 }
 
-getUserCoordinates()
+if(savedUserCity === null){
+    getUserCoordinates();
+} else {
+    cityName = savedUserCity;
+    locationEl.innerHTML = "Your Location is: " + cityName
+}
 
 var locationApiUrl;
 
@@ -31,18 +43,18 @@ function getLocation() {
       .then(function (data) {
         locationEl.innerHTML = "Your Location is: " + data[0].name;
         cityName = data[0].name
+        localStorage.setItem("savedUserCity", cityName)
         changeCity();
+        getCurrentWeather();
+        getWeatherForecast();
       });
 }
 
-var cityName = "Los Angeles";
 
 // Changes made when the city is changed
 function changeCity() {
     currentWeatherApiUrl = "https://api.openweathermap.org/data/2.5/weather?q=" + cityName + "&units=imperial&appid=a8a24a0664c1c73300a989d7368f05da"
     weatherForecastApiUrl = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&units=imperial&appid=a8a24a0664c1c73300a989d7368f05da"
-    getCurrentWeather();
-    getWeatherForecast();
 }
 
 // URL for current weather 
@@ -57,13 +69,42 @@ function getCurrentWeather() {
       })
       .then(function (data) {
         var iconLink = "http://openweathermap.org/img/wn/" + data.weather[0].icon + "@2x.png"
+
+        // changing backgrounds according to icon (default = rainy1)
+        var backgroundEl = document.getElementById("today")
+        if(data.weather[0].icon === "01d") {
+            backgroundEl.style.backgroundImage = "url(assets/images/sunny.png)"
+        } else if(data.weather[0].icon === "01n") {
+            backgroundEl.style.backgroundImage = "url(assets/images/clearnight.png)"
+        } else if(data.weather[0].icon === "02n" || data.weather[0].icon === "02d") {
+            backgroundEl.style.backgroundImage = "url(assets/images/lightclouds.png)"
+        } else if(data.weather[0].icon === "03n" || data.weather[0].icon === "03d") {
+            backgroundEl.style.backgroundImage = "url(assets/images/moreclouds.png)"
+        } else if(data.weather[0].icon === "04n" || data.weather[0].icon === "04d") {
+            backgroundEl.style.backgroundImage = "url(assets/images/clouds.png)"
+        } else if(data.weather[0].icon === "09n" || data.weather[0].icon === "09d") {
+            backgroundEl.style.backgroundImage = "url(assets/images/rainy2.png)"
+        } else if(data.weather[0].icon === "10n" || data.weather[0].icon === "10d") {
+            backgroundEl.style.backgroundImage = "url(assets/images/rainy1.png)"
+        } else if(data.weather[0].icon === "11n" || data.weather[0].icon === "11d") {
+            backgroundEl.style.backgroundImage = "url(assets/images/storm.png)"
+        }  else if(data.weather[0].icon === "13n" || data.weather[0].icon === "13d") {
+            backgroundEl.style.backgroundImage = "url(assets/images/snow.jpg)"
+        }  else if(data.weather[0].icon === "50n" || data.weather[0].icon === "50d") {
+            backgroundEl.style.backgroundImage = "url(assets/images/fog.jpg)"
+        }  
+
+
+
         document.getElementById("day0").textContent = "The Weather today in " + cityName;
         document.querySelector("#bigWidget").setAttribute("src", iconLink);
         document.getElementById("temp0").textContent = "Temperature: " + data.main.temp + "°F",
         document.getElementById("wind0").textContent = "Wind: " + data.wind.speed + " MPH",
         document.getElementById("humidity0").textContent = "Humidity: " + data.main.humidity + "%"
       });
-}
+    }
+        
+
 
 // URL for 5 days weather forecast
 var weatherForecastApiUrl = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&units=imperial&appid=a8a24a0664c1c73300a989d7368f05da"
@@ -76,7 +117,7 @@ function getWeatherForecast() {
         return response.json();
       })
       .then(function (data) {
-        
+        // Function to retrieve the right data for the right day
         function generateweatherforecast(index1, index2) {
             var iconLink = "http://openweathermap.org/img/wn/" + data.list[index1].weather[0].icon + "@2x.png"
             document.querySelectorAll(".date")[index2].textContent = dayjs.unix(data.list[index1].dt).format("M/D/YYYY");
@@ -85,30 +126,80 @@ function getWeatherForecast() {
             document.querySelectorAll(".wind")[index2].textContent = "Wind: " + data.list[index1].wind.speed + " MPH";
             document.querySelectorAll(".humidity")[index2].textContent = "Humidity: " + data.list[index1].main.humidity + "%";
         }
-
-        generateweatherforecast(1, 0);
-        generateweatherforecast(9, 1)
-        generateweatherforecast(17, 2)
-        generateweatherforecast(25, 3)
-        generateweatherforecast(33, 4)
+        // Getting Weather for each day
+        generateweatherforecast(6, 0);
+        generateweatherforecast(14, 1)
+        generateweatherforecast(22, 2)
+        generateweatherforecast(30, 3)
+        generateweatherforecast(38, 4)
       });
-}
+}   
+        
 
 
-// TODO: make weather change according to city input
-// - make apis url var
-// - get information from Api
-// - save info into corresponding vars
-// - populate apropriate items on page
-// - Do this for both current day and 5 days forecast
-
-// TODO: Create button generation and change city on selection
+// button generation and change city on selection
 document.getElementById("search").addEventListener("click", function () {
+    
     cityName = document.getElementById("cityInput").value
     changeCity();
+    fetch(weatherForecastApiUrl).then(function (response) {
+        if(response.ok === true) {
+            getCurrentWeather();
+            getWeatherForecast();
+            if(cityHistory.includes(cityName)){
+                return;
+            } else {
+                searchHistoryEl.style.display = "block"
+                saveCity(); 
+            }
+        }
+      })
+
 })
-// - take user input and cross check with database
-// - add jQuery autocomplete widget
+
 // - save to local storage
+function saveCity(){
+    cityHistory.push(cityName);
+    localStorage.setItem("cityHistory", JSON.stringify(cityHistory));
+    createNewBtn(cityName);
+}
+
+function createNewBtn(content) {
+    var newBtn = document.createElement("button");
+        newBtn.setAttribute("class", "pastCity")
+        newBtn.textContent = content;
+        newBtn.addEventListener("click", function() {
+            cityName = this.textContent;
+            changeCity();
+            getCurrentWeather();
+            getWeatherForecast();
+        })
+        searchHistoryEl.appendChild(newBtn)
+}
 // - create button on page
+var searchHistoryEl = document.getElementById("searchHistory")
+
+function createHistoryBtns() {
+    for(var i = 0; i < cityHistory.length; i++){
+        createNewBtn(cityHistory[i]);
+        
+    }
+}
 // - link button to changeCity
+
+createHistoryBtns();
+if(cityHistory.length <= 0){
+    searchHistoryEl.style.display = "none";
+}
+
+// Reset Search History Btn
+document.getElementById("resetBtn").addEventListener("click", function() {
+    cityHistory = [];
+    localStorage.setItem("cityHistory", JSON.stringify(cityHistory));
+    searchHistoryEl.style.display = "none"
+    var allSavedCities = document.querySelectorAll(".pastCity")
+    for(var i = 0; i < allSavedCities.length; i++) {
+        allSavedCities[i].remove()
+    }
+})
+
