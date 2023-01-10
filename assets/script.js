@@ -22,7 +22,7 @@ function getUserCoordinates() {
 function showPosition(position) {
   lon = position.coords.longitude;
   lat = position.coords.latitude;
-  locationApiUrl = "http://api.openweathermap.org/geo/1.0/reverse?lat=" + lat + "&lon=" + lon + "&limit=1&appid=a8a24a0664c1c73300a989d7368f05da";
+  locationApiUrl = "https://api.openweathermap.org/geo/1.0/reverse?lat=" + lat + "&lon=" + lon + "&limit=1&appid=a8a24a0664c1c73300a989d7368f05da";
   getLocation();
 }
 
@@ -68,7 +68,7 @@ function getCurrentWeather() {
         return response.json();
       })
       .then(function (data) {
-        var iconLink = "http://openweathermap.org/img/wn/" + data.weather[0].icon + "@2x.png"
+        var iconLink = "https://openweathermap.org/img/wn/" + data.weather[0].icon + "@2x.png"
 
         // changing backgrounds according to icon (default = rainy1)
         var backgroundEl = document.getElementById("today")
@@ -119,7 +119,7 @@ function getWeatherForecast() {
       .then(function (data) {
         // Function to retrieve the right data for the right day
         function generateweatherforecast(index1, index2) {
-            var iconLink = "http://openweathermap.org/img/wn/" + data.list[index1].weather[0].icon + "@2x.png"
+            var iconLink = "https://openweathermap.org/img/wn/" + data.list[index1].weather[0].icon + "@2x.png"
             document.querySelectorAll(".date")[index2].textContent = dayjs.unix(data.list[index1].dt).format("M/D/YYYY");
             document.querySelectorAll(".smallWidget")[index2].setAttribute("src", iconLink);
             document.querySelectorAll(".temp")[index2].textContent = "Temperature: " + data.list[index1].main.temp + "°F";
