@@ -206,6 +206,7 @@ if(cityHistory.length <= 0){
 // Reset Search History Btn
 document.getElementById("resetBtn").addEventListener("click", function() {
     localStorage.removeItem("cityHistory")
+    cityHistory = [];
     searchHistoryEl.style.display = "none"
     var allSavedCities = document.querySelectorAll(".pastCity")
     for(var i = 0; i < allSavedCities.length; i++) {

@@ -93,7 +93,7 @@ aside {
     width: 75%;
     display: flex;
     flex-direction: column;
-    height: 700px;
+    height: 600px;
     justify-content: space-between;
 }
 
@@ -116,9 +116,11 @@ aside {
     align-items: center;
     color: #E6EBE0;
     opacity: 90%;
+    font-size: 1vw;
+    width: 100%;
 }
 
-#today p {
+#temp0, #wind0, #humidity0 {
     font-size: 30px;
     padding: 5px;
     margin: 20px;
@@ -126,6 +128,10 @@ aside {
     background-color: #E6EBE0;
     opacity: 70%;
     width: 30%;
+}
+
+#currentDate {
+    font-size: 2vw;
 }
 
 #day0 {
@@ -150,13 +156,13 @@ aside {
 .day{
     background-color: #5D576B;
     width: 17%;
-    height: 100%;
+    height: 90%;
     padding-left: 1%;
     color: #E6EBE0;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    font-size: 120%;
+    font-size: 1vw;
     border-radius: 5px;
 }
 
@@ -193,7 +199,6 @@ aside {
     }
     #weatherHeader{
         height: 20%;
-        font-size: 70%;
     }
     #bigWidget {
         height: 90%;
