@@ -10,7 +10,7 @@ var cityName = localStorage.getItem(savedUserCity) || defaultCity;
 
 
 var locationEl = document.getElementById("yourLocation");
-
+// resets user city and reloads page so user can re-set their location
 locationEl.addEventListener("click", function() {
     localStorage.removeItem("savedUserCity")
     location.reload()
@@ -31,6 +31,7 @@ function showPosition(position) {
   getLocation();
 }
 
+// Checking if weather location has already been detected or not
 if(savedUserCity === null){
     getUserCoordinates();
 } else {
@@ -46,8 +47,8 @@ function getLocation() {
         return response.json();
       })
       .then(function (data) {
-        locationEl.innerHTML = "Your Location is: " + data[0].name;
-        cityName = data[0].name
+        cityName = data[0].name + ", " + data[0].country
+        locationEl.innerHTML = "Your Location is: " + cityName;
         localStorage.setItem("savedUserCity", cityName)
         changeCity();
         getCurrentWeather();
@@ -75,7 +76,6 @@ function getCurrentWeather() {
       .then(function (data) {
         // Getting and setting current date
         document.getElementById("currentDate").textContent = dayjs.unix(data.dt).format("HH:mm - dddd M/D/YYYY");
-        console.log(data.dt)
         // Getting icon
         var iconLink = "https://openweathermap.org/img/wn/" + data.weather[0].icon + "@2x.png"
 
@@ -115,7 +115,6 @@ function getCurrentWeather() {
 
 // URL for 5 days weather forecast
 var weatherForecastApiUrl = "https://api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&units=imperial&appid=a8a24a0664c1c73300a989d7368f05da"
-var weatherForecast = [];
 getWeatherForecast();
 
 // Fetsching weather forecast
@@ -124,7 +123,6 @@ function getWeatherForecast() {
         return response.json();
       })
       .then(function (data) {
-        console.log(data)
         // Function to retrieve the right data for the right day
         function generateweatherforecast(index1, index2) {
             var iconLink = "https://openweathermap.org/img/wn/" + data.list[index1].weather[0].icon + "@2x.png"
@@ -151,9 +149,11 @@ document.getElementById("search").addEventListener("click", function () {
     cityName = document.getElementById("cityInput").value
     changeCity();
     fetch(weatherForecastApiUrl).then(function (response) {
+        // checks weather the city excists in the database
         if(response.ok === true) {
             getCurrentWeather();
             getWeatherForecast();
+            // check if it already has been saved
             if(cityHistory.includes(cityName)){
                 return;
             } else {
@@ -165,13 +165,14 @@ document.getElementById("search").addEventListener("click", function () {
 
 })
 
-// - save to local storage
+// save city searched to local storage
 function saveCity(){
     cityHistory.push(cityName);
     localStorage.setItem("cityHistory", JSON.stringify(cityHistory));
     createNewBtn(cityName);
 }
 
+// Create new city button when a new city is searched
 function createNewBtn(content) {
     var newBtn = document.createElement("button");
         newBtn.setAttribute("class", "pastCity")
@@ -184,7 +185,8 @@ function createNewBtn(content) {
         })
         searchHistoryEl.appendChild(newBtn)
 }
-// - create button on page
+
+// Creating saved buttons on pageload
 var searchHistoryEl = document.getElementById("searchHistory")
 
 function createHistoryBtns() {
@@ -193,9 +195,10 @@ function createHistoryBtns() {
         
     }
 }
-// - link button to changeCity
 
+// makes cityHistory apear on pageload
 createHistoryBtns();
+// if no cities are saved the reset button disapears
 if(cityHistory.length <= 0){
     searchHistoryEl.style.display = "none";
 }

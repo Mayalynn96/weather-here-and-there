@@ -1,3 +1,4 @@
+/* general personal resets and styling */
 *{
     margin: 0;
     padding: 0;
@@ -5,6 +6,7 @@
     font-family: 'Karla', sans-serif;
 }
 
+/* Header styling */
 header {
     display: flex;
     justify-content: space-between;
@@ -19,12 +21,14 @@ header {
     font-weight: bold;
 }
 
+/* main part of the page */
 main {
     display: flex;
     margin: 2%;
     width: 96%;
 }
 
+/* the search and search history part */
 aside {
     font-size: 20px;
     width: 25%;
@@ -84,6 +88,7 @@ aside {
     background-color: #E6EBE0;
 }
 
+/* All the weather containers styling */
 #allWeatherContainer {
     width: 75%;
     display: flex;
@@ -92,15 +97,25 @@ aside {
     justify-content: space-between;
 }
 
+/* current weather styling */
 #today {
     height: 330px;
     border: solid 5px #5D576B;
     border-radius: 5px;
-    background-image: url(images/rainy1.png);
+    background-image: url(../images/rainy1.png);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
     margin-bottom: 20px;
+}
+
+#weatherHeader {
+    display: flex;
+    background-color: #5D576B;
+    height: 10vh;
+    align-items: center;
+    color: #E6EBE0;
+    opacity: 90%;
 }
 
 #today p {
@@ -113,24 +128,17 @@ aside {
     width: 30%;
 }
 
-#weatherHeader {
-    display: flex;
-    background-color: #5D576B;
-    height: 10vh;
-    align-items: center;
-    color: #E6EBE0;
-    opacity: 90%;
-}
-
 #day0 {
     margin: 10px;
 }
 
+/* middle title '5-Day Forecast' */
 #title5Days {
     color: #5D576B;
     font-size: 150%;
 }
 
+/* 5 day forecast cards styling */
 #forcast5Days {
     display: flex;
     justify-content: space-between;
@@ -164,6 +172,7 @@ aside {
     width: 10vh;
 }
 
+/* media Queries */
 @media screen and (max-width: 1360px) {
     .day{
         height: 80%;
@@ -208,6 +217,10 @@ aside {
     .day {
         width: 100%;
     }
+    #weatherHeader{
+        height: 20%;
+        font-size: 60%;
+    }
     main {
         flex-direction: column;
     }
@@ -229,11 +242,16 @@ aside {
     #searchHistory {
         padding: 1%;
         flex-direction: row;
+        flex-wrap: wrap;
     }
     #resetBtn, .pastCity {
-        font-size: 90%;
+        font-size: 50%;
         width: auto;
-        margin: 1px;
+        margin: 2px;
+        color: #5D576B;
+    }
+    #title5Days {
+        font-size: 100%;
     }
     #allWeatherContainer {
         width: 100%;
