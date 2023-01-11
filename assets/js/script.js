@@ -13,7 +13,7 @@ var locationEl = document.getElementById("yourLocation");
 // resets user city and reloads page so user can re-set their location
 locationEl.addEventListener("click", function() {
     localStorage.removeItem("savedUserCity")
-    location.reload()
+    getUserCoordinates();
 })
 
 // getting coordinates
@@ -31,9 +31,8 @@ function showPosition(position) {
   getLocation();
 }
 
-// Checking if weather location has already been detected or not
+// Checking if weather location has already been set or not
 if(savedUserCity === null){
-    getUserCoordinates();
 } else {
     cityName = savedUserCity;
     locationEl.innerHTML = "Your Location is: " + cityName
