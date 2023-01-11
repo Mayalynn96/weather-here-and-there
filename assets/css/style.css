@@ -93,7 +93,6 @@ aside {
     width: 75%;
     display: flex;
     flex-direction: column;
-    height: 600px;
     justify-content: space-between;
 }
 
@@ -127,7 +126,7 @@ aside {
     color: #5D576B;
     background-color: #E6EBE0;
     opacity: 70%;
-    width: 30%;
+    width: 40%;
 }
 
 #currentDate {
@@ -150,13 +149,13 @@ aside {
     justify-content: space-between;
     align-items: flex-start;
     width: 100%;
-    height: 300px;
+    /* height: 300px; */
 }
 
 .day{
     background-color: #5D576B;
     width: 17%;
-    height: 90%;
+    height: 150%;
     padding-left: 1%;
     color: #E6EBE0;
     display: flex;
@@ -178,23 +177,13 @@ aside {
     width: 10vh;
 }
 
-/* media Queries */
-@media screen and (max-width: 1360px) {
-    .day{
-        height: 80%;
-        font-size: 100%;
-    }
-    #today p {
-        width: 50%;
-    }
-}
-
 @media screen and (max-width: 1023px) {
     #forcast5Days {
         flex-wrap: wrap;
     }
     .day {
         width: 45%;
+        height: 50%;
         margin: 10px;
     }
     #weatherHeader{
@@ -203,10 +192,7 @@ aside {
     #bigWidget {
         height: 90%;
     }
-    #today {
-        height: auto;
-    }
-    #today p {
+    #temp0, #wind0, #humidity0 {
         width: 90%;
         font-size: 150%;
     }
@@ -216,11 +202,19 @@ aside {
     #allWeatherContainer {
         width: 65%;
     }
+    .day{
+        font-size: 2vw;
+    }
 }
 
 @media  screen and (max-width: 767px) {
     .day {
         width: 100%;
+        font-size: 3vw;
+        padding: 5px;
+    }
+    .day p {
+        margin-top: 5px;
     }
     #weatherHeader{
         height: 20%;
