@@ -14,6 +14,11 @@ header {
     color: #E6EBE0;
 }
 
+#yourLocation:hover {
+    color: black;
+    font-weight: bold;
+}
+
 main {
     display: flex;
     margin: 2%;
@@ -169,7 +174,7 @@ aside {
     }
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 1023px) {
     #forcast5Days {
         flex-wrap: wrap;
     }
@@ -178,9 +183,59 @@ aside {
         margin: 10px;
     }
     #weatherHeader{
-        height: 8vh;
+        height: 20%;
+        font-size: 70%;
+    }
+    #bigWidget {
+        height: 90%;
+    }
+    #today {
+        height: auto;
     }
     #today p {
         width: 90%;
+        font-size: 150%;
+    }
+    aside {
+        width: 35%;
+    }
+    #allWeatherContainer {
+        width: 65%;
+    }
+}
+
+@media  screen and (max-width: 767px) {
+    .day {
+        width: 100%;
+    }
+    main {
+        flex-direction: column;
+    }
+    aside{
+        width: 100%;
+        flex-direction: row;
+        margin-bottom: 20px;
+    }
+    #searchpart {
+        border: 0;
+        border-right: #5D576B solid 2px;
+        padding: 1%;
+        width: 30%;
+        font-size: 50%;
+    }
+    #cityInput, #search {
+        font-size: 150%;
+    }
+    #searchHistory {
+        padding: 1%;
+        flex-direction: row;
+    }
+    #resetBtn, .pastCity {
+        font-size: 90%;
+        width: auto;
+        margin: 1px;
+    }
+    #allWeatherContainer {
+        width: 100%;
     }
 }
