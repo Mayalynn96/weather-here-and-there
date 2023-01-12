@@ -12,6 +12,10 @@ N/A
 
 To visit my website go to the following URL: https://mayalynn96.github.io/weather-here-and-there/
 
+![Gif of user location feature](./assets/README%20images/userLocation.gif)
+
+![Gif of city search history feature](./assets/README%20images/citySearchHistory.gif)
+
 Provide instructions and examples for use. Include screenshots as needed.
 
 To add a screenshot, create an `assets/images` folder in your repository and upload your screenshot to it. Then, using the relative filepath, add it to your README using the following syntax:

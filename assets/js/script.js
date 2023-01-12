@@ -161,6 +161,8 @@ document.getElementById("search").addEventListener("click", function () {
                 searchHistoryEl.style.display = "block"
                 saveCity();
             }
+        } else {
+            alert("⚡ Please enter a valid location ⚡")
         }
     })
 
