@@ -30,6 +30,8 @@ If a city that has already been saved is entered, the weather will change but no
 
 ![Gif of city history exeptions and set user location](./assets/README%20images/cityExeptions.gif)
 
+NOTES: The way the api is build makes it so that the 5 day forecast includes the current day and the times will change depending on what time it is where the user is. The city search alone is very unspecific and might return the wrong city. Use state and country code to get the correct results. The user location only allows for city and country so it might be incorrect due to cities in different states with the same name like Arlington, US could be any of the following: Arlington, WA / Arlington, TX / Arlington, VA 
+
 ## Credits
 
 N/A
